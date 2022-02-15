@@ -6,11 +6,11 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 module.exports = {
   mode: 'development',
   entry: './src/scripts/index.ts',
-  devtool: 'eval-source-map',
   output: {
     path: path.resolve(__dirname, 'public'),
     filename: 'bundle.[chunkhash].js',
   },
+  devtool: 'eval-source-map',
   devServer: {
     port: 3000,
     watchFiles: ['src/**/*']
