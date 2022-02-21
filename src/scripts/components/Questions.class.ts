@@ -6,8 +6,8 @@ interface Options {
 }
 
 export default class Questions {
-  $questionsContainer: HTMLElement;
-  _questions: QuestionOptions[];
+  private $questionsContainer: HTMLElement;
+  private _questions: QuestionOptions[];
 
   constructor(options: Options) {
     this.$questionsContainer = document.querySelector(options.selector);
@@ -17,8 +17,9 @@ export default class Questions {
   renderQuestions() {
     this.$questionsContainer.innerHTML = '';
     for (let question of this._questions) {
-      this.$questionsContainer.appendChild(new Question(question)
-        .returnHTML());
+      this.$questionsContainer.appendChild(
+        new Question(question).returnHTML()
+      );
     }
   }
 }

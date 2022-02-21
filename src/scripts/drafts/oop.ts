@@ -159,10 +159,6 @@ class QuestionService extends FirebaseCrud {
     questions: '/posts'
   }
 
-  constructor() {
-    super();
-  }
-
   getQuestions(): Promise<AxiosResponse> {
     return this.get(this._paths.questions);
   }

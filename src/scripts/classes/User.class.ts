@@ -6,10 +6,10 @@ export interface Options {
 }
 
 export default class User {
-  _id: string;
-  _name: string;
-  _email: string;
-  _password: string;
+  private _id: string;
+  private _name: string;
+  private _email: string;
+  private _password: string;
 
   constructor(options: Options) {
     this._id = options.id;

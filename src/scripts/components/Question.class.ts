@@ -9,13 +9,13 @@ export interface Options {
 }
 
 export default class Question {
-  _userId: string;
-  _userName: string;
-  _id: string;
-  _title: string;
-  _body: string;
-  _date: moment.Moment;
-  _isExpanded: boolean = false;
+  private _userId: string;
+  private _userName: string;
+  private _id: string;
+  private _title: string;
+  private _body: string;
+  private _date: moment.Moment;
+  private _isExpanded: boolean = false;
 
   constructor(options: Options) {
     this._userId = options.userId;
@@ -26,7 +26,7 @@ export default class Question {
     this._date = moment().subtract(1, 'hours');
   }
 
-  getPeriod() {
+  private getPeriod() {
     const currentDate = moment();
     const diffDays = currentDate.diff(this._date, 'days');
     const diffHours = currentDate.diff(this._date, 'hours');
@@ -39,7 +39,7 @@ export default class Question {
     return `${diffDays === 1 ? `${diffDays} day` : `${diffDays} days`}`;
   }
 
-  setExpanded(id: string) {
+  private setExpanded(id: string) {
     const element = document.getElementById(id)
       .querySelector('span');
     const span = document.createElement('span');
@@ -60,7 +60,7 @@ export default class Question {
     element.appendChild(span);
   }
 
-  getBodyContent(body: any, _id?: string) {
+  private getBodyContent(body: any, _id?: string) {
     if (this._body.length > 200 && !this._isExpanded) {
       const span = document.createElement('span');
 
