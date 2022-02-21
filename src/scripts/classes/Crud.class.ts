@@ -2,43 +2,11 @@ import axios, { AxiosResponse } from 'axios';
 import HttpRequest from '../types/HttpRequest.interface';
 
 
-export default class FirebaseCrud implements HttpRequest {
-  private url: string = 'https://jsonplaceholder.typicode.com';
-
-  post(path: string, data: any): Promise<AxiosResponse<any, any>> {
+export default class Crud implements HttpRequest {
+  post(url: string, data: any): Promise<AxiosResponse<any, any>> {
     return new Promise(async (resolve, reject) => {
       try {
-        const res = await axios.post(`${this.url}${path}`, data);
-        return resolve(res.data);
-      } catch (error) {
-        return reject(error);
-      }
-    })
-  }
-  patch(path: string, id: string, data: any): Promise<AxiosResponse<any, any>> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const res = await axios.patch(`${this.url}${path}/${id}`, data);
-        return resolve(res.data);
-      } catch (error) {
-        return reject(error);
-      }
-    })
-  }
-  delete(path: string, id: string, data?: any): Promise<AxiosResponse<any, any>> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const res = await axios.delete(`${this.url}${path}/${id}`, data);
-        return resolve(res.data);
-      } catch (error) {
-        return reject(error);
-      }
-    })
-  }
-  put(path: string, id: string, data: any): Promise<AxiosResponse<any, any>> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const res = await axios.put(`${this.url}${path}/${id}`, data);
+        const res = await axios.post(url, data);
         return resolve(res.data);
       } catch (error) {
         return reject(error);
@@ -46,10 +14,43 @@ export default class FirebaseCrud implements HttpRequest {
     })
   }
 
-  get(path: string): Promise<AxiosResponse> {
+  patch(url: string, data: any): Promise<AxiosResponse<any, any>> {
     return new Promise(async (resolve, reject) => {
       try {
-        const res = await axios.get(`${this.url}${path}`);
+        const res = await axios.patch(url, data);
+        return resolve(res.data);
+      } catch (error) {
+        return reject(error);
+      }
+    })
+  }
+
+  delete(url: string, data?: any): Promise<AxiosResponse<any, any>> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const res = await axios.delete(url, data);
+        return resolve(res.data);
+      } catch (error) {
+        return reject(error);
+      }
+    })
+  }
+
+  put(url: string, data: any): Promise<AxiosResponse<any, any>> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const res = await axios.put(url, data);
+        return resolve(res.data);
+      } catch (error) {
+        return reject(error);
+      }
+    })
+  }
+
+  get(url: string): Promise<AxiosResponse> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const res = await axios.get(url);
         return resolve(res.data);
       } catch (error) {
         return reject(error);

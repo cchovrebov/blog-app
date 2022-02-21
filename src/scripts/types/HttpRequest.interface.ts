@@ -1,9 +1,9 @@
 import { AxiosResponse } from 'axios';
 
 export default interface HttpRequest {
-  get(path: string): Promise<AxiosResponse>
-  post(path: string, data: any): Promise<AxiosResponse>
-  patch(path: string, id: string, data: any): Promise<AxiosResponse>
-  delete(path: string, id: string, data?: any): Promise<AxiosResponse>
-  put(path: string, id: string, data: any): Promise<AxiosResponse>
+  get(url: string): Promise<AxiosResponse>
+  post(url: string, data: any): Promise<AxiosResponse>
+  patch(url: string, id: string, data: any): Promise<AxiosResponse>
+  delete(url: string, id: string, data?: any): Promise<AxiosResponse>
+  put(url: string, id: string, data: any): Promise<AxiosResponse>
 }

@@ -1,7 +1,7 @@
-import Question from '../components/Question.class';
-import Questions from '../components/Questions.class';
+import Crud from './Crud.class';
+import User from './User.class';
 
 export {
-  Question,
-  Questions,
+  Crud,
+  User,
 }

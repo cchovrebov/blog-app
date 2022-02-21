@@ -1,4 +1,4 @@
-import { Questions } from "./classes/index";
+import { Questions } from "./components/index";
 import { Options as QuestionOptions } from './components/Question.class';
 import QuestionService from '../services/QuestionService';
 import '../styles/index.scss';
@@ -32,7 +32,41 @@ new Questions({
   questions: data,
 }).renderQuestions();
 
-QuestionService.getQuestions()
-  .then(res => {
-    console.log(res);
-  }).catch(err => err)
+// QuestionService.getQuestions()
+//   .then(res => {
+//     console.log(res);
+//   }).catch(err => err)
+
+
+// QuestionService.getQuestionById('1')
+//   .then(res => {
+//     console.log(res);
+//   }).catch(err => err)
+
+// QuestionService.patchQuestion('1', { title: 'test ' })
+//   .then(res => {
+//     console.log(res);
+//   }).catch(err => err);
+
+// QuestionService.putQuestion('1', {
+//   "userId": 1,
+//   "title": "test 2",
+//   "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+// })
+//   .then(res => {
+//     console.log(res);
+//   }).catch(err => err);
+
+// QuestionService.createQuestion({
+//   "userId": 3,
+//   "title": "Title",
+//   "body": "Description"
+// })
+//   .then(res => {
+//     console.log(res);
+//   }).catch(err => err);
+
+// QuestionService.deleteQuestion('1')
+//   .then(res => {
+//     console.log(res);
+//   }).catch(err => err);

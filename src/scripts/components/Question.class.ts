@@ -51,8 +51,8 @@ export default class Question {
       span.appendChild(a2);
       this._isExpanded = false;
     } else {
-      a2.innerText = ' Suppress';
-      span.innerHTML = this._body;
+      a2.innerText = 'Suppress';
+      span.innerHTML = `${this._body} `;
       span.appendChild(a2);
       this._isExpanded = true;
     }

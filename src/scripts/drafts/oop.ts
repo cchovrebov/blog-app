@@ -131,7 +131,7 @@ new Programmer({
 //   // ... Visi kiti HTTP metodai
 // }
 
-// Sukurti FirebaseCrud.class.ts clase kuri implementuos HttpRequest interface
+// Sukurti Crud.class.ts clase kuri implementuos HttpRequest interface
 // ir aprasyti CRUD visus metodus
 // Klase turi tureti url lauka, tinkamai
 
