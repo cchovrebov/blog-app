@@ -1,6 +1,9 @@
 import { Questions } from "./components/index";
 import { Options as QuestionOptions } from './components/Question.class';
-import QuestionService from '../services/QuestionService';
+import {
+  QuestionService,
+  UserService,
+} from '../services/index';
 import '../styles/index.scss';
 
 const data: QuestionOptions[] = [
@@ -32,10 +35,10 @@ new Questions({
   questions: data,
 }).renderQuestions();
 
-// QuestionService.getQuestions()
-//   .then(res => {
-//     console.log(res);
-//   }).catch(err => err)
+UserService.getUsers()
+  .then(res => {
+    console.log(res);
+  }).catch(err => err)
 
 
 // QuestionService.getQuestionById('1')
