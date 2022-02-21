@@ -1,6 +1,6 @@
 import { Questions } from "./classes/index";
 import { Options as QuestionOptions } from './components/Question.class';
-import './drafts/oop';
+import QuestionService from '../services/QuestionService';
 import '../styles/index.scss';
 
 const data: QuestionOptions[] = [
@@ -32,3 +32,7 @@ new Questions({
   questions: data,
 }).renderQuestions();
 
+QuestionService.getQuestions()
+  .then(res => {
+    console.log(res);
+  }).catch(err => err)

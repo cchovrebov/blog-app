@@ -126,50 +126,26 @@ new Programmer({
 // Aprasyti HttpRequest.interface.ts interface kuris tures metodus aprasancius
 // visus Http metodus
 
-interface HttpRequest {
-  get(path: string): Promise<AxiosResponse>
-  // ... Visi kiti HTTP metodai
-}
+// interface HttpRequest {
+//   get(path: string): Promise<AxiosResponse>
+//   // ... Visi kiti HTTP metodai
+// }
 
 // Sukurti FirebaseCrud.class.ts clase kuri implementuos HttpRequest interface
 // ir aprasyti CRUD visus metodus
 // Klase turi tureti url lauka, tinkamai
 
 
-class FirebaseCrud implements HttpRequest {
-  private url: string = 'https://jsonplaceholder.typicode.com';
-
-  get(path: string): Promise<AxiosResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const res = await axios.get(`${this.url}${path}`);
-        return resolve(res.data);
-      } catch (error) {
-        return reject(error);
-      }
-    })
-  }
-}
-
 // Sukurti QuestionService.ts kuri paveldes Crud klase ir
 // aprasys visas CRUD operacijas.
 
-class QuestionService extends FirebaseCrud {
-  private _paths = {
-    questions: '/posts'
-  }
 
-  getQuestions(): Promise<AxiosResponse> {
-    return this.get(this._paths.questions);
-  }
-}
 
-const questionService = new QuestionService();
+// const questionService = new QuestionService();
 
-questionService.getQuestions()
-  .then(res => {
-    console.log(res);
-  })
-  .catch(err => err)
+// questionService.getQuestions()
+//   .then(res => {
+//     console.log(res);
+//   }).catch(err => err)
 
 // Pademonstruoti kad visi QuestionService CRUD metodai veikia
