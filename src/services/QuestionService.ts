@@ -2,34 +2,34 @@ import { AxiosResponse } from 'axios';
 import Crud from '../scripts/classes/Crud.class';
 
 class QuestionService extends Crud {
-  private url: string = 'https://jsonplaceholder.typicode.com';
+  private _url: string = 'https://jsonplaceholder.typicode.com';
 
   private _paths = {
     questions: '/posts'
   }
 
   getQuestions(): Promise<AxiosResponse> {
-    return this.get(`${this.url}${this._paths.questions}`);
+    return this.get(`${this._url}${this._paths.questions}`);
   }
 
   getQuestionById(id: string): Promise<AxiosResponse> {
-    return this.get(`${this.url}${this._paths.questions}/${id}`);
+    return this.get(`${this._url}${this._paths.questions}/${id}`);
   }
 
   createQuestion(data: any): Promise<AxiosResponse> {
-    return this.post(`${this.url}${this._paths.questions}`, data);
+    return this.post(`${this._url}${this._paths.questions}`, data);
   }
 
   patchQuestion(id: string, data: any): Promise<AxiosResponse> {
-    return this.patch(`${this.url}${this._paths.questions}/${id}`, data);
+    return this.patch(`${this._url}${this._paths.questions}/${id}`, data);
   }
 
   putQuestion(id: string, data: any): Promise<AxiosResponse> {
-    return this.put(`${this.url}${this._paths.questions}/${id}`, data);
+    return this.put(`${this._url}${this._paths.questions}/${id}`, data);
   }
 
   deleteQuestion(id: string, data?: any): Promise<AxiosResponse> {
-    return this.delete(`${this.url}${this._paths.questions}/${id}`, data);
+    return this.delete(`${this._url}${this._paths.questions}/${id}`, data);
   }
 }
 
