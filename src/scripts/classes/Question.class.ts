@@ -1,0 +1,102 @@
+import * as moment from 'moment';
+
+export interface Options {
+  userId: string;
+  userName: string;
+  id: string;
+  title: string;
+  body: string;
+}
+
+export default class Question {
+  _userId: string;
+  _userName: string;
+  _id: string;
+  _title: string;
+  _body: string;
+  _date: moment.Moment;
+  _isExpanded: boolean = false;
+
+  constructor(options: Options) {
+    this._userId = options.userId;
+    this._userName = options.userName;
+    this._id = options.id;
+    this._title = options.title;
+    this._body = options.body;
+    this._date = moment().subtract(1, 'hours');
+  }
+
+  getPeriod() {
+    const currentDate = moment();
+    const diffDays = currentDate.diff(this._date, 'days');
+    const diffHours = currentDate.diff(this._date, 'hours');
+    const diffMinutes = currentDate.diff(this._date, 'minutes');
+    const diffSeconds = currentDate.diff(this._date, 'seconds');
+
+    if (diffMinutes < 1) return `${diffSeconds === 1 ? `${diffSeconds} minute` : `${diffSeconds} minutes`}`;
+    if (diffHours < 1) return `${diffMinutes === 1 ? `${diffMinutes} minute` : `${diffMinutes} minutes`}`;
+    if (diffDays < 1) return `${diffHours === 1 ? `${diffHours} hour` : `${diffHours} hours`}`;
+    return `${diffDays === 1 ? `${diffDays} day` : `${diffDays} days`}`;
+  }
+
+  setExpanded(id: string) {
+    const element = document.getElementById(id)
+      .querySelector('span');
+    const span = document.createElement('span');
+    const a2 = document.createElement('a');
+    a2.addEventListener('click', () => this.setExpanded(id));
+    if (this._isExpanded) {
+      a2.innerText = ' Read more';
+      span.innerHTML = `${this._body.substring(0, 100)}... `;
+      span.appendChild(a2);
+      this._isExpanded = false;
+    } else {
+      a2.innerText = ' Suppress';
+      span.innerHTML = this._body;
+      span.appendChild(a2);
+      this._isExpanded = true;
+    }
+    element.innerHTML = '';
+    element.appendChild(span);
+  }
+
+  getBodyContent(body: any, _id?: string) {
+    if (this._body.length > 200 && !this._isExpanded) {
+      const span = document.createElement('span');
+
+      const a2 = document.createElement('a');
+      a2.innerText = 'Read more';
+      a2.addEventListener('click', () => this.setExpanded(_id));
+      span.innerHTML = `${this._body.substring(0, 100)}... `;
+      span.appendChild(a2);
+      body.appendChild(span);
+      return body;
+    } else {
+      return body;
+    }
+  }
+
+  returnHTML() {
+    const article = document.createElement('article');
+    article.setAttribute('id', this._id);
+    article.setAttribute('class', 'question-item')
+
+    const title = document.createElement('div');
+    title.innerText = this._title;
+    title.className = 'mui--text-headline';
+
+    const body = document.createElement('div');
+    body.className = 'mui--text-dark-secondary';
+    this.getBodyContent(body, this._id);
+
+    const a1 = document.createElement('a');
+    a1.setAttribute('href', '#');
+    a1.innerHTML = `By <a href="#">${this._userName}</a> ${this.getPeriod()} ago`;
+
+    article.appendChild(title);
+    article.appendChild(a1);
+    article.appendChild(body);
+
+    return article;
+  }
+}

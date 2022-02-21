@@ -18,34 +18,34 @@
 // // }
 // // console.log(zmogus);
 
-// // class Human {
-// //   static count = 0;
+// class Human {
+//   static count = 0;
 
-// //   constructor(options) {
-// //     this._firstName = options.firstName;
-// //     this._lastName = options.lastName;
-// //     this._age = options.age;
-// //     this._weight = options.weight;
-// //     this._heigth = options.heigth;
-// //     Human.count++;
-// //     console.log(`${Human.count} human created`);
-// //   }
+//   constructor(options) {
+//     this._firstName = options.firstName;
+//     this._lastName = options.lastName;
+//     this._age = options.age;
+//     this._weight = options.weight;
+//     this._heigth = options.heigth;
+//     Human.count++;
+//     console.log(`${Human.count} human created`);
+//   }
 
-// //   // Metodai
-// //   sayHello() {
-// //     console.log(`Hello, my name is ${this._firstName}`);
-// //   }
+//   // Metodai
+//   sayHello() {
+//     console.log(`Hello, my name is ${this._firstName}`);
+//   }
 
-// //   // Setter
-// //   set firstName(firstName) {
-// //     this._firstName = firstName;
-// //   }
+//   // Setter
+//   set firstName(firstName) {
+//     this._firstName = firstName;
+//   }
 
-// //   // Getter
-// //   get firstName() {
-// //     return this._firstName;
-// //   }
-// // }
+//   // Getter
+//   get firstName() {
+//     return this._firstName;
+//   }
+// }
 
 // // const human = new Human({
 // //   firstName: 'MyName',

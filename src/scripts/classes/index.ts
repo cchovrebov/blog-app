@@ -1,7 +1,7 @@
-import PostTS from './Post.class';
-import PostsTS from './Posts.class';
+import Question from './Question.class';
+import Questions from './Questions.class';
 
 export {
-  PostTS,
-  PostsTS,
+  Question,
+  Questions,
 }

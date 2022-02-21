@@ -1,16 +1,34 @@
-// import './oop'
+import { Questions } from "./classes/index";
+import { Options as QuestionOptions } from './classes/Question.class';
+import './drafts/oop';
+import '../styles/index.scss';
 
-// const myTest: number = 1231;
-// console.log(myTest);
-// import '../styles/index.scss';
-// import { MyComponent } from '../components/nav/MyComponent';
+const data: QuestionOptions[] = [
+  {
+    userId: 'userId',
+    userName: 'User',
+    id: 'id',
+    title: 'My first post',
+    body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam nulla dolore sit sed deserunt nihil ipsum labore, porro, debitis quis ipsam! Laboriosam cupiditate dolorum tenetur maxime eius. Officiis, ullam nisi!',
+  },
+  {
+    userId: 'userId1',
+    userName: 'User 1',
+    id: 'id1',
+    title: 'My first post1',
+    body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam nulla dolore sit sed deserunt nihil ipsum labore, porro, debitis quis ipsam! Laboriosam cupiditate dolorum tenetur maxime eius. Officiis, ullam nisi!',
+  },
+  {
+    userId: 'userId2',
+    userName: 'User 2',
+    id: 'id2',
+    title: 'My first post2',
+    body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam nulla dolore sit sed deserunt nihil ipsum labore, porro, debitis quis ipsam! Laboriosam cupiditate dolorum tenetur maxime eius. Officiis, ullam nisi!',
+  }
+];
 
-// const myNum: number = 2131;
-// console.log('Veikia ', myNum);
-// MyComponent();
+new Questions({
+  selector: '#questions',
+  questions: data,
+}).renderQuestions();
 
-// Uzduotis
-// Sukurti klausimu objekta
-// Sukurti 3 klases User, Question, Quostions
-// Atvaizduoti klausimus naudojant klases
-// Visi failai .ts
