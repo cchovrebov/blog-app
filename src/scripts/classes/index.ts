@@ -1,5 +1,5 @@
-import Question from './Question.class';
-import Questions from './Questions.class';
+import Question from '../components/Question.class';
+import Questions from '../components/Questions.class';
 
 export {
   Question,

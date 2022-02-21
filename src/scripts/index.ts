@@ -1,5 +1,5 @@
 import { Questions } from "./classes/index";
-import { Options as QuestionOptions } from './classes/Question.class';
+import { Options as QuestionOptions } from './components/Question.class';
 import './drafts/oop';
 import '../styles/index.scss';
 
