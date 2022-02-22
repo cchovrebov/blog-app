@@ -16,6 +16,7 @@ export function validateQuestionForm(): boolean {
   // 1. Title ir body maziausiai butu 3 simboliai
   // 2. Title daugiausiai butu 50 simboliai
   // 3. Body max simboliu skaicius 2000
+  // Jeigu forma validi, istrinti visus errorus
 
   return isValid;
 }
