@@ -1,6 +1,6 @@
-import { Questions } from "./components/index";
+import { Questions, Question } from "./components/index";
 import { Options as QuestionOptions } from './components/Question.class';
-import TestService from './drafts/TestService';
+import { QuestionService } from "./services/index";
 import './styles/index.scss';
 
 const data: QuestionOptions[] = [
@@ -27,18 +27,30 @@ const data: QuestionOptions[] = [
   }
 ];
 
-const testData = {
+const testData = new Question({
+  userId: 'userId2',
+  userName: 'User 2',
+  id: 'id2',
   title: 'test',
-  description: 'test description'
-}
+  body: 'test body'
+});
 
-// TestService.createTest(testData)
+console.log(testData);
+
+
+// QuestionService.createQuestion({
+//   title: testData.getTitle,
+//   body: testData.getBody,
+//   date: testData.getDate.format('YYYY-MM-DD HH:mm:ss'),
+//   userId: testData.getUserId,
+//   userName: testData.getUserName
+// })
 //   .then(data => {
 //     console.log(data);
 //   }).catch(err => console.log(err))
 
 
-// TestService.getTest()
-//   .then(data => {
-//     console.log(data);
-//   }).catch(err => console.log(err))
+QuestionService.getQuestions()
+  .then(data => {
+    console.log(data);
+  }).catch(err => console.log(err))

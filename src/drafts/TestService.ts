@@ -23,13 +23,6 @@ class TestService extends Crud {
     const data = await this.get(`${this._url}${this._paths.test}`);
     return this.toEntity(data);
   }
-
-  async updateTest(id: string, data: any): Promise<any> {
-    const res = await this.patch(`${this._url}${this._paths.test}/${id}`, data);
-    console.log(res);
-
-    return res;
-  }
 }
 
 export default new TestService();

@@ -1,13 +1,12 @@
 import * as moment from 'moment';
 
 export interface Options {
-  userId: string;
-  userName: string;
-  id: string;
+  userId?: string;
+  userName?: string;
+  id?: string;
   title: string;
   body: string;
 }
-
 export default class Question {
   private _userId: string;
   private _userName: string;
@@ -23,7 +22,31 @@ export default class Question {
     this._id = options.id;
     this._title = options.title;
     this._body = options.body;
-    this._date = moment().subtract(1, 'hours');
+    this._date = moment();
+  }
+
+  get getTitle() {
+    return this._title;
+  }
+
+  get getBody() {
+    return this._body;
+  }
+
+  get getDate() {
+    return this._date;
+  }
+
+  get getUserName() {
+    return this._userName;
+  }
+
+  get getUserId() {
+    return this._userId;
+  }
+
+  get getId() {
+    return this._id;
   }
 
   private getPeriod() {
