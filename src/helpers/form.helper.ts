@@ -1,5 +1,3 @@
-import { Options } from '../components/Question.class';
-
 export function validateQuestionForm(): boolean {
   const title: any = document.getElementById('questionTitle');
   const body: any = document.getElementById('questionBody');
