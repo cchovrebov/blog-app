@@ -25,6 +25,7 @@
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.6.0",
     "html-webpack-plugin": "^5.5.0",
+    "lodash": "^4.17.21",
     "mini-css-extract-plugin": "^2.5.3",
     "moment": "^2.29.1",
     "sass": "^1.49.7",

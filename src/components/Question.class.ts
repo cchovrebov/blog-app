@@ -1,12 +1,12 @@
 import * as moment from 'moment';
 
 export interface Options {
-  userId?: string;
-  userName?: string;
-  id?: string;
   title: string;
   body: string;
-  date: string;
+  id?: string;
+  userId?: string;
+  userName?: string;
+  date?: string;
 }
 export default class Question {
   private _userId: string;
@@ -23,7 +23,7 @@ export default class Question {
     this._id = options.id;
     this._title = options.title;
     this._body = options.body;
-    this._date = options.date;
+    this._date = options.date || moment().format('YYYY-MM-DD HH:mm:ss');
   }
 
   get getTitle() {

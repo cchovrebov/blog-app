@@ -1,5 +1,6 @@
 import { AxiosResponse } from 'axios';
 import Crud from '../classes/Crud.class';
+const _ = require('lodash');
 
 export interface Options {
   userId?: string;
@@ -18,10 +19,15 @@ class QuestionService extends Crud {
   }
 
   private toEntity(data: any): Array<Options> {
-    return Object.keys(data).map(key => ({
+    if (!data) {
+      return [];
+    }
+    const formatedData = _.keys(data).map((key: string) => ({
       ...data[key],
       id: key
-    }));
+    }))
+
+    return _.orderBy(formatedData, ['date'], ['desc']);
   }
 
   async getQuestions(): Promise<Array<Options>> {
