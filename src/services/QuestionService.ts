@@ -1,9 +1,9 @@
 import { AxiosResponse } from 'axios';
-import Crud from '../scripts/classes/Crud.class';
-import { Options } from '../scripts/components/Question.class'
+import Crud from '../classes/Crud.class';
+import { Options } from '../components/Question.class'
 
 class QuestionService extends Crud {
-  private _url: string = 'https://blog-app-81fcb-default-rtdb.europe-west1.firebasedatabase.app';
+  private _url: string = '';
 
   private _paths = {
     questions: '/questions'
