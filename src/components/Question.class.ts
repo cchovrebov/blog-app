@@ -6,6 +6,7 @@ export interface Options {
   id?: string;
   title: string;
   body: string;
+  date: string;
 }
 export default class Question {
   private _userId: string;
@@ -13,7 +14,7 @@ export default class Question {
   private _id: string;
   private _title: string;
   private _body: string;
-  private _date: moment.Moment;
+  private _date: string;
   private _isExpanded: boolean = false;
 
   constructor(options: Options) {
@@ -22,7 +23,7 @@ export default class Question {
     this._id = options.id;
     this._title = options.title;
     this._body = options.body;
-    this._date = moment();
+    this._date = options.date;
   }
 
   get getTitle() {
@@ -95,6 +96,7 @@ export default class Question {
       body.appendChild(span);
       return body;
     } else {
+      body.innerText = this._body;
       return body;
     }
   }

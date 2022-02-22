@@ -26,10 +26,14 @@
 
         <form class="mui-form">
           <div class="mui-textfield mui-textfield--float-label">
-            <input type="text" id="question">
-            <label>Your question</label>
+            <input type="text" id="questionTitle">
+            <label>Title</label>
           </div>
-          <button type="submit"
+          <div class="mui-textfield">
+            <textarea id="questionBody"></textarea>
+            <label>Question</label>
+          </div>
+          <button type="submit" id="questionBtn"
             class="mui-btn mui-btn--raised mui--bg-color-indigo-500 mui--color-indigo-50">Submit</button>
         </form>
         <br>
@@ -40,10 +44,6 @@
         <div id="questions"></div>
       </div>
     </div>
-    <!-- <div id="box"></div>
-    <div id="circle"></div> -->
-    <!-- <div id="posts"></div>
-    <div id="posts2"></div> -->
   </div>
 </body>
 

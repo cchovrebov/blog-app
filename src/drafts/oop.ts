@@ -108,7 +108,6 @@ class Human implements HumanInterface {
 class Programmer extends Human {
   constructor(options: any) {
     super(options);
-    console.log(this.walk());
   }
 }
 
