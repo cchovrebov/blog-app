@@ -1,3 +1,5 @@
+import { ErrorMessages } from './error.helper';
+
 export function validateQuestionForm(): boolean {
   const title: any = document.getElementById('questionTitle');
   const body: any = document.getElementById('questionBody');
@@ -5,40 +7,40 @@ export function validateQuestionForm(): boolean {
 
   if (!title.value) {
     document.getElementById('titleError')
-      .innerText = 'This field is required';
+      .innerText = ErrorMessages.field_required;
     isValid = false;
   }
   if (!body.value) {
     document.getElementById('bodyError')
-      .innerText = 'This field is required';
+      .innerText = ErrorMessages.field_required;
     isValid = false;
   }
 
-  if (title.value.length < 3) {
+  if (title.value && title.value.length < 3) {
     document.getElementById('titleError')
-      .innerText = 'This field should have at least 3 characters';
+      .innerText = ErrorMessages.field_too_short;
     isValid = false;
   }
-  if (title.value.length > 50) {
+  if (title.value && title.value.length > 50) {
     document.getElementById('titleError')
-      .innerText = 'This field exceeds characters limit';
+      .innerText = ErrorMessages.field_too_long;
     isValid = false;
   }
 
 
   if (!body.value) {
     document.getElementById('bodyError')
-      .innerText = 'This field is required';
+      .innerText = ErrorMessages.field_required;
     isValid = false;
   }
-  if (body.value.length < 3) {
+  if (body.value && body.value.length < 3) {
     document.getElementById('bodyError')
-      .innerText = 'This field should have at least 3 characters';
+      .innerText = ErrorMessages.field_too_short;
     isValid = false;
   }
-  if (body.value.length > 2000) {
+  if (body.value && body.value.length > 2000) {
     document.getElementById('bodyError')
-      .innerText = 'This field exceeds characters limit';
+      .innerText = ErrorMessages.field_too_long;
     isValid = false;
   }
 
@@ -59,12 +61,12 @@ export function validateLoginForm(): boolean {
 
   if (!email.value) {
     document.getElementById('emailError')
-      .innerText = 'This field is required';
+      .innerText = ErrorMessages.field_required;
     isValid = false;
   }
   if (!password.value) {
     document.getElementById('passwordError')
-      .innerText = 'This field is required';
+      .innerText = ErrorMessages.field_required;
     isValid = false;
   }
 
@@ -72,6 +74,20 @@ export function validateLoginForm(): boolean {
     document.getElementById('emailError').innerText = '';
     document.getElementById('passwordError').innerText = '';
   }
+
+  return isValid;
+}
+
+
+export function validateSignUpForm(): boolean {
+  let isValid = true;
+
+  // Your code goes here
+
+  // Validation rules
+  // Is email exist
+  // Is password exist
+  // Is password match repeat password
 
   return isValid;
 }

@@ -4,13 +4,11 @@ export interface Options {
   title: string;
   body: string;
   id?: string;
-  userId?: string;
-  userName?: string;
+  userEmail?: string;
   date?: string;
 }
 export default class Question {
-  private _userId: string;
-  private _userName: string;
+  private _userEmail: string;
   private _id: string;
   private _title: string;
   private _body: string;
@@ -18,8 +16,7 @@ export default class Question {
   private _isExpanded: boolean = false;
 
   constructor(options: Options) {
-    this._userId = options.userId;
-    this._userName = options.userName;
+    this._userEmail = options.userEmail;
     this._id = options.id;
     this._title = options.title;
     this._body = options.body;
@@ -38,12 +35,8 @@ export default class Question {
     return this._date;
   }
 
-  get getUserName() {
-    return this._userName;
-  }
-
-  get getUserId() {
-    return this._userId;
+  get getUserEmail() {
+    return this._userEmail;
   }
 
   get getId() {
@@ -116,7 +109,7 @@ export default class Question {
 
     const a1 = document.createElement('a');
     a1.setAttribute('href', '#');
-    a1.innerHTML = `By <a href="#">${this._userName}</a> ${this.getPeriod()} ago`;
+    a1.innerHTML = `By <a href="#">${this._userEmail}</a> ${this.getPeriod()} ago`;
 
     article.appendChild(title);
     article.appendChild(a1);

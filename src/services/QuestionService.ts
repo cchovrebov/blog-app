@@ -3,8 +3,7 @@ import Crud from '../classes/Crud.class';
 const _ = require('lodash');
 
 export interface Options {
-  userId?: string;
-  userName?: string;
+  userEmail?: string;
   id?: string;
   title: string;
   body: string;
@@ -35,25 +34,18 @@ class QuestionService extends Crud {
     return this.toEntity(res);
   }
 
-  createQuestion(data: Options): Promise<AxiosResponse> {
-    return this.post(`${this._url}${this._paths.questions}`, data);
+  createQuestion(data: Options): Promise<any> {
+    console.log(data);
+
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      console.log('No token');
+
+      return Promise.resolve('Test');
+    }
+    return this.post(`${this._url}${this._paths.questions}?auth=${token}`, data);
   }
-
-  // getQuestionById(id: string): Promise<AxiosResponse> {
-  //   return this.get(`${this._url}${this._paths.questions}/${id}`);
-  // }
-
-  // patchQuestion(id: string, data: Options): Promise<AxiosResponse> {
-  //   return this.patch(`${this._url}${this._paths.questions}/${id}`, data);
-  // }
-
-  // putQuestion(id: string, data: Options): Promise<AxiosResponse> {
-  //   return this.put(`${this._url}${this._paths.questions}/${id}`, data);
-  // }
-
-  // deleteQuestion(id: string, data?: Options): Promise<AxiosResponse> {
-  //   return this.delete(`${this._url}${this._paths.questions}/${id}`, data);
-  // }
 }
 
 export default new QuestionService();

@@ -1,16 +1,25 @@
 import { Questions, Question } from "./components/index";
 import { QuestionService, AuthService } from "./services/index";
+import { User } from './classes/index';
 import { validateQuestionForm, validateLoginForm } from './helpers/form.helper';
+import { ErrorMessages } from './helpers/error.helper';
 import { getMui } from './helpers/modal.helper';
 import './styles/index.scss';
 
 
 (function () {
+  let user: User = null;
   const token = localStorage.getItem('token');
+  const email = localStorage.getItem('email');
+
+  if (email) user = new User({ email });
 
   const questionBtn: any = document.getElementById('questionBtn');
   const loginBtn: any = document.getElementById('loginBtn');
+  const createQuestionError: any = document.getElementById('createQuestionError');
+
   questionBtn.disabled = !token;
+  loginBtn.style.display = token ? 'none' : 'inline-block';
 
   loginBtn.addEventListener('click', function (e: any) {
     e.preventDefault();
@@ -18,6 +27,7 @@ import './styles/index.scss';
     modalEl.className = 'modal';
     modalEl.innerHTML = `
       <form class="mui-form">
+        <p id="loginError" class="error"></p>
         <div class="mui-textfield mui-textfield--float-label">
           <input type="text" id="email">
           <label>Email</label>
@@ -38,6 +48,7 @@ import './styles/index.scss';
       e.preventDefault();
       const email: any = document.getElementById('email');
       const password: any = document.getElementById('password');
+      const loginError: any = document.getElementById('loginError');
 
       if (validateLoginForm()) {
         console.log(email.value, password.value);
@@ -46,11 +57,17 @@ import './styles/index.scss';
           password: password.value,
           returnSecureToken: true,
         }).then((res: any) => {
+          loginError.innerText = '';
           localStorage.setItem('token', res.idToken);
+          localStorage.setItem('email', email.value);
           loginBtn.style.display = 'none';
+          questionBtn.disabled = false;
+          user = new User({
+            email: email.value,
+          });
         })
-          .catch((err: any) => {
-            console.log({ err });
+          .catch(() => {
+            loginError.innerText = ErrorMessages.wrong_password;
           });
       }
     });
@@ -63,27 +80,27 @@ import './styles/index.scss';
     const body: any = document.getElementById('questionBody');
 
 
-    if (validateQuestionForm()) {
+    if (validateQuestionForm() && user) {
       const question = new Question({
         title: title.value,
         body: body.value,
-        userId: '1',
-        userName: 'My user'
+        userEmail: user.getEmail
       });
       questionBtn.disabled = true;
       QuestionService.createQuestion({
         title: question.getTitle,
         body: question.getBody,
         date: question.getDate,
-        userId: question.getUserId,
-        userName: question.getUserName,
+        userEmail: question.getUserEmail,
       }).then(() => {
+        createQuestionError.innerText = '';
         renderQuestionList();
         title.value = '';
         body.value = '';
         questionBtn.disabled = false;
       }).catch(() => {
         questionBtn.disabled = false;
+        createQuestionError.innerText = ErrorMessages.no_token;
       })
     }
 
