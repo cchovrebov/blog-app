@@ -1,6 +1,6 @@
 import { Questions, Question } from "./components/index";
-import { QuestionService } from "./services/index";
-import { validateQuestionForm } from './helpers/form.helper';
+import { QuestionService, AuthService } from "./services/index";
+import { validateQuestionForm, validateLoginForm } from './helpers/form.helper';
 import { getMui } from './helpers/modal.helper';
 import './styles/index.scss';
 
@@ -16,10 +16,44 @@ import './styles/index.scss';
     e.preventDefault();
     const modalEl = document.createElement('div');
     modalEl.className = 'modal';
-    console.log(getMui());
-
-    // // show modal
+    modalEl.innerHTML = `
+      <form class="mui-form">
+        <div class="mui-textfield mui-textfield--float-label">
+          <input type="text" id="email">
+          <label>Email</label>
+          <p id="emailError" class="error"></p>
+        </div>
+        <div class="mui-textfield mui-textfield--float-label">
+          <input type="password" id="password">
+          <label>Password</label>
+          <p id="passwordError" class="error"></p>
+        </div>
+        <button type="button" id="signIn"
+          class="mui-btn mui-btn--raised mui--bg-color-indigo-500 mui--color-indigo-50">Login</button>
+      </form>`;
+    // show modal
     getMui().overlay('on', modalEl);
+    const signInBtn = document.getElementById('signIn');
+    signInBtn.addEventListener('click', function (e: any) {
+      e.preventDefault();
+      const email: any = document.getElementById('email');
+      const password: any = document.getElementById('password');
+
+      if (validateLoginForm()) {
+        console.log(email.value, password.value);
+        AuthService.login({
+          email: email.value,
+          password: password.value,
+          returnSecureToken: true,
+        }).then((res: any) => {
+          localStorage.setItem('token', res.idToken);
+          loginBtn.style.display = 'none';
+        })
+          .catch((err: any) => {
+            console.log({ err });
+          });
+      }
+    });
   })
 
   questionBtn.addEventListener('click', function (e: any) {

@@ -14,11 +14,6 @@ export function validateQuestionForm(): boolean {
     isValid = false;
   }
 
-  // Papildyti validacija kad tikrintu
-  // 1. Title ir body maziausiai butu 3 simboliai
-  // 2. Title daugiausiai butu 50 simboliai
-  // 3. Body max simboliu skaicius 2000
-  // Jeigu forma validi, istrinti visus errorus
   if (title.value.length < 3) {
     document.getElementById('titleError')
       .innerText = 'This field should have at least 3 characters';
@@ -50,6 +45,32 @@ export function validateQuestionForm(): boolean {
   if (isValid) {
     document.getElementById('titleError').innerText = '';
     document.getElementById('bodyError').innerText = '';
+  }
+
+  return isValid;
+}
+
+
+export function validateLoginForm(): boolean {
+  let isValid = true;
+
+  const email: any = document.getElementById('email');
+  const password: any = document.getElementById('password');
+
+  if (!email.value) {
+    document.getElementById('emailError')
+      .innerText = 'This field is required';
+    isValid = false;
+  }
+  if (!password.value) {
+    document.getElementById('passwordError')
+      .innerText = 'This field is required';
+    isValid = false;
+  }
+
+  if (isValid) {
+    document.getElementById('emailError').innerText = '';
+    document.getElementById('passwordError').innerText = '';
   }
 
   return isValid;

@@ -18,11 +18,11 @@ export default class User {
     this._password = options.password;
   }
 
-  login() {
-    console.log(`Logging in with credentials email: ${this._email}, password: ${this._password}`);
+  static login(email: string, password: string) {
+    console.log(email, password);
   }
 
-  logout() {
+  static logout() {
     console.log('Logging out...');
   }
 }
