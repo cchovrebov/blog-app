@@ -1,16 +1,26 @@
 import { Questions, Question } from "./components/index";
 import { QuestionService } from "./services/index";
 import { validateQuestionForm } from './helpers/form.helper';
+import { getMui } from './helpers/modal.helper';
 import './styles/index.scss';
 
 
 (function () {
   const token = localStorage.getItem('token');
-  console.log(token);
 
   const questionBtn: any = document.getElementById('questionBtn');
+  const loginBtn: any = document.getElementById('loginBtn');
   questionBtn.disabled = !token;
 
+  loginBtn.addEventListener('click', function (e: any) {
+    e.preventDefault();
+    const modalEl = document.createElement('div');
+    modalEl.className = 'modal';
+    console.log(getMui());
+
+    // // show modal
+    getMui().overlay('on', modalEl);
+  })
 
   questionBtn.addEventListener('click', function (e: any) {
     e.preventDefault();
