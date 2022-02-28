@@ -5,7 +5,13 @@ import './styles/index.scss';
 
 
 (function () {
+  const token = localStorage.getItem('token');
+  console.log(token);
+
   const questionBtn: any = document.getElementById('questionBtn');
+  questionBtn.disabled = !token;
+
+
   questionBtn.addEventListener('click', function (e: any) {
     e.preventDefault();
     // Jusu kodas kuris saugos klausima ir atnaujina sarasa
