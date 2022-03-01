@@ -4,4 +4,5 @@ export enum ErrorMessages {
   field_too_long = 'This field bvalue exceeds characters limit',
   wrong_password = 'Wrong credentials',
   no_token = 'Permission denied',
+  password_not_match = 'Password doesn\'t match',
 }

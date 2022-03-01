@@ -16,8 +16,8 @@ class AuthService extends Crud {
     return this.post(this._signInUrl, data);
   }
 
-  singUp(data: LoginProps) {
-    // Your code goes here
+  singUp(data: LoginProps): Promise<AxiosResponse> {
+    return this.post(this._signUpUrl, data);
   }
 }
 

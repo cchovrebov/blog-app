@@ -82,12 +82,58 @@ export function validateLoginForm(): boolean {
 export function validateSignUpForm(): boolean {
   let isValid = true;
 
-  // Your code goes here
+  const email: any = document.getElementById('email');
+  const password: any = document.getElementById('password');
+  const repeatPassword: any = document.getElementById('repeatPassword');
 
-  // Validation rules
-  // Is email exist
-  // Is password exist
-  // Is password match repeat password
+  const emailRegex: RegExp = /\d/;
+  const passwordRegex: RegExp = /\d/;
+
+  // Email regex
+  // pvz: mymail@mail.com
+  // (mymail) - Prasidet turi nuo mazuju/diziuju raidziu, skaiciu, taip pat galima naudoti simbolius _ - ir ne daugiau nei 50 simboliu
+  // (@)
+  // (mail) - Gali tureti savyje tuos pacius simbolius kaip ir mailo pradzia tik ne daugiau nei 15 simboliu
+  // (.)
+  // pasibaigt turi zodziais com, ru, eu, lt, org, net
+
+
+  // Password regex
+  // Turi tureti bent viena didziaja raide
+  // Turi tureti bent viena mazaja raide
+  // Turi tureti bent viena skaiciu
+  // Turi tureti bent special character is duotu !@#$%^&*()-+/.,
+
+
+  if (!email.value) {
+    document.getElementById('emailError')
+      .innerText = ErrorMessages.field_required;
+    isValid = false;
+  }
+  if (!emailRegex.test(email.value)) {
+    // Your code
+  }
+
+  if (!password.value) {
+    document.getElementById('passwordError')
+      .innerText = ErrorMessages.field_required;
+    isValid = false;
+  }
+  if (!passwordRegex.test(password.value)) {
+    // Your code
+  }
+
+  if (!repeatPassword.value) {
+    document.getElementById('repeatPasswordError')
+      .innerText = ErrorMessages.field_required;
+    isValid = false;
+  }
+  if (password.value !== repeatPassword.value) {
+    document.getElementById('repeatPasswordError')
+      .innerText = ErrorMessages.password_not_match;
+    isValid = false;
+  }
+
 
   return isValid;
 }
