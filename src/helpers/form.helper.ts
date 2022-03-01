@@ -86,8 +86,19 @@ export function validateSignUpForm(): boolean {
   const password: any = document.getElementById('password');
   const repeatPassword: any = document.getElementById('repeatPassword');
 
-  const emailRegex: RegExp = /\d/;
+  const emailRegex: RegExp = /^([a-zA-Z0-9]+_*-*[a-zA-Z0-9]+)@([a-zA-Z0-9]+_*-*[a-zA-Z0-9]+)\.(com|ru|eu|lt|org|net)/;
   const passwordRegex: RegExp = /\d/;
+
+  //   my_mail@mail.com
+  // my-mail@gmail.com
+  // mymail@gmail.net
+  // mymail@mail.caa
+  // my@mail@mail.com
+  // mY-MaIl@mail.ru
+  // 777-MaIl@mail.ru
+  // _777-MaIl12712@mail.ru
+  // 777-MaIl12712_@mail.ru
+  // console.log(emailRegex.test('777-MaIl12712_@mail.ru'));
 
   // Email regex
   // pvz: mymail@mail.com
