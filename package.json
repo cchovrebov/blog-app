@@ -39,6 +39,7 @@
   },
   "dependencies": {
     "axios": "^0.26.0",
-    "firebase": "^9.6.7"
+    "firebase": "^9.6.7",
+    "socket.io-client": "^4.4.1"
   }
 }

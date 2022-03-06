@@ -18,37 +18,70 @@
   <div id="content" class="mui-container-fluid">
     <!-- blog posts go here -->
 
-    <div class="mui-row">
-      <div class="mui-col-sm-10 mui-col-sm-offset-1">
-        <br>
-        <br>
-        <div class="mui--text-dark-secondary mui--text-body2 indigo">QUESTION FORM</div>
+    <ul class="mui-tabs__bar">
+      <li class="mui--is-active"><a data-mui-toggle="tab" data-mui-controls="question-tab">QUESTIONS</a></li>
+      <li><a id="chatTabBtn" data-mui-toggle="tab" data-mui-controls="chat-tab">CHAT</a></li>
+    </ul>
 
-        <form class="mui-form">
-          <p id="createQuestionError" class="error"></p>
-          <div class="mui-textfield mui-textfield--float-label">
-            <input type="text" id="questionTitle">
-            <label>Title</label>
-            <p id="titleError" class="error"></p>
+    <div class="mui-tabs__pane mui--is-active" id="question-tab">
+      <div class="mui-row">
+        <div class="mui-col-sm-10 mui-col-sm-offset-1">
+          <br>
+          <br>
+          <div class="mui--text-dark-secondary mui--text-body2 indigo">QUESTION FORM</div>
+
+          <form class="mui-form">
+            <p id="createQuestionError" class="error"></p>
+            <div class="mui-textfield mui-textfield--float-label">
+              <input type="text" id="questionTitle">
+              <label>Title</label>
+              <p id="titleError" class="error"></p>
+            </div>
+            <div class="mui-textfield">
+              <textarea id="questionBody"></textarea>
+              <label>Question</label>
+              <p id="bodyError" class="error"></p>
+            </div>
+            <button type="submit" id="questionBtn"
+              class="mui-btn mui-btn--raised mui--bg-color-indigo-500 mui--color-indigo-50">Submit</button>
+            <button type="submit" id="logOutBtn"
+              class="mui-btn mui-btn--raised mui--bg-color-indigo-500 mui--color-indigo-50">Log-out</button>
+            <button type="submit" id="loginBtn"
+              class="mui-btn mui-btn--raised mui--bg-color-indigo-500 mui--color-indigo-50">Login</button>
+            <button type="submit" id="signUpBtn"
+              class="mui-btn mui-btn--raised mui--bg-color-indigo-500 mui--color-indigo-50">Sign-up</button>
+          </form>
+          <br>
+          <br>
+          <div class="mui--text-dark-secondary mui--text-body2">RECENT QUESTIONS</div>
+          <div class="mui-divider"></div>
+          <br>
+          <div id="questions"></div>
+        </div>
+      </div>
+
+    </div>
+    <div class="mui-tabs__pane" id="chat-tab">
+      <div class="chat-container">
+        <header class="chat-header">
+          <h1><i class="fas fa-smile"></i> ChatCord</h1>
+          <a id="leave-btn" class="btn">Leave Room</a>
+        </header>
+        <main class="chat-main">
+          <div class="chat-sidebar">
+            <h3><i class="fas fa-comments"></i> Room Name:</h3>
+            <h2 id="room-name"></h2>
+            <h3><i class="fas fa-users"></i> Users</h3>
+            <ul id="users"></ul>
           </div>
-          <div class="mui-textfield">
-            <textarea id="questionBody"></textarea>
-            <label>Question</label>
-            <p id="bodyError" class="error"></p>
-          </div>
-          <button type="submit" id="questionBtn"
-            class="mui-btn mui-btn--raised mui--bg-color-indigo-500 mui--color-indigo-50">Submit</button>
-          <button type="submit" id="loginBtn"
-            class="mui-btn mui-btn--raised mui--bg-color-indigo-500 mui--color-indigo-50">Login</button>
-          <button type="submit" id="signUpBtn"
-            class="mui-btn mui-btn--raised mui--bg-color-indigo-500 mui--color-indigo-50">Sign-up</button>
-        </form>
-        <br>
-        <br>
-        <div class="mui--text-dark-secondary mui--text-body2">RECENT QUESTIONS</div>
-        <div class="mui-divider"></div>
-        <br>
-        <div id="questions"></div>
+          <div class="chat-messages"></div>
+        </main>
+        <div class="chat-form-container">
+          <form id="chat-form">
+            <input id="msg" type="text" placeholder="Enter Message" required autocomplete="off" />
+            <button class="btn"><i class="fas fa-paper-plane"></i> Send</button>
+          </form>
+        </div>
       </div>
     </div>
   </div>

@@ -17,10 +17,31 @@ import './styles/index.scss';
   const questionBtn: any = document.getElementById('questionBtn');
   const loginBtn: any = document.getElementById('loginBtn');
   const signUpBtn: any = document.getElementById('signUpBtn');
+  const logOutBtn: any = document.getElementById('logOutBtn');
+  const chatTabBtn: any = document.getElementById('chatTabBtn');
   const createQuestionError: any = document.getElementById('createQuestionError');
 
   questionBtn.disabled = !token;
   loginBtn.style.display = token ? 'none' : 'inline-block';
+  signUpBtn.style.display = token ? 'none' : 'inline-block';
+  logOutBtn.style.display = token ? 'inline-block' : 'none';
+
+  setTabDisabled(!!token);
+
+  function setTabDisabled(isEnabled: boolean) {
+    if (isEnabled) chatTabBtn.removeAttribute('disabled');
+    else chatTabBtn.setAttribute('disabled', '');
+  }
+
+  logOutBtn.addEventListener('click', function (e: any) {
+    e.preventDefault();
+    localStorage.removeItem('token');
+    localStorage.removeItem('email');
+    loginBtn.style.display = 'inline-block';
+    signUpBtn.style.display = 'inline-block';
+    logOutBtn.style.display = 'none';
+    setTabDisabled(false);
+  })
 
   signUpBtn.addEventListener('click', function (e: any) {
     e.preventDefault();
@@ -57,26 +78,25 @@ import './styles/index.scss';
       const loginError: any = document.getElementById('loginError');
 
       if (validateSignUpForm()) {
-        console.log(email.value, password.value);
         AuthService.singUp({
           email: email.value,
           password: password.value,
           returnSecureToken: true,
         }).then((res: any) => {
-          console.log(res);
-
           loginError.innerText = '';
           localStorage.setItem('token', res.idToken);
           localStorage.setItem('email', email.value);
           loginBtn.style.display = 'none';
+          signUpBtn.style.display = 'none';
           questionBtn.disabled = false;
+          getMui().close
           user = new User({
             email: email.value,
           });
+          setTabDisabled(true);
+          logOutBtn.style.display = 'inline-block';
         })
           .catch((err) => {
-            console.log(err);
-
             loginError.innerText = ErrorMessages.wrong_password;
           });
       }
@@ -123,10 +143,13 @@ import './styles/index.scss';
           localStorage.setItem('token', res.idToken);
           localStorage.setItem('email', email.value);
           loginBtn.style.display = 'none';
+          signUpBtn.style.display = 'none';
           questionBtn.disabled = false;
           user = new User({
             email: email.value,
           });
+          setTabDisabled(true);
+          logOutBtn.style.display = 'inline-block';
         })
           .catch(() => {
             loginError.innerText = ErrorMessages.wrong_password;
