@@ -1,8 +1,17 @@
-const io = require('socket.io')(5000, {
+const http = require('http');
+const express = require('express');
+const socketio = require('socket.io');
+const cors = require('cors')
+
+const app = express();
+app.use(cors());
+const server = http.createServer(app);
+const io = socketio(server, {
   cors: {
-    origin: ['http://localhost:3000']
+    origin: ["http://localhost:3000"]
   }
 });
+
 
 const _ = require('lodash');
 
@@ -10,19 +19,20 @@ let users = [];
 const messages = [];
 
 io.on('connection', socket => {
-
   socket.on('user-connect', (user) => {
     if (!_.find(users, { email: user.email })) {
       users.push(user);
     }
-    console.log('User connected: ', user, users);
-    socket.emit('user-connect', users, user.email);
+    socket.join('main');
+    socket.emit('user-connected', users);
+    socket.broadcast.to('main').emit('user-connected', users);
   });
 
   socket.on('user-disconnect', (user) => {
     users = _.filter(users, item => item.email !== user.email);
     console.log('User disconnected: ', user, users);
-    socket.emit('user-disconnect', users);
+
+    socket.broadcast.to('main').emit('user-disconnect', users);
   });
 
   socket.on('message-send', (message) => {
@@ -34,6 +44,11 @@ io.on('connection', socket => {
     })) {
       messages.push(message);
     }
-    socket.emit('message-send', messages);
+    socket.broadcast.to('main').emit('message-send', messages);
   });
 })
+
+
+const PORT = process.env.PORT || 5000;
+
+server.listen(PORT, () => console.log(`Server running on port ${PORT}`));

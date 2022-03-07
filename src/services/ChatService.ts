@@ -14,9 +14,10 @@ socket.on('connect', () => {
   console.log('Connected to socket id: ', socket.id);
 });
 
-socket.on('user-connect', (users, email) => {
-  console.log(users, email);
-  const currentUser = _.find(users, { email });
+socket.on('user-connected', (users) => {
+  console.log('user-connected', users);
+  const currentUserEmail = localStorage.getItem('email');
+  const currentUser = _.find(users, { email: currentUserEmail });
 
   if (currentUser) {
     const currentUserElement = document.getElementById('current-user');
@@ -24,7 +25,7 @@ socket.on('user-connect', (users, email) => {
   }
   const otherUsers = _.filter(users, (user: {
     email: string
-  }) => user.email !== email);
+  }) => user.email !== currentUserEmail);
 
   const usersList = document.getElementById('users');
   usersList.innerHTML = '';
@@ -36,8 +37,13 @@ socket.on('user-connect', (users, email) => {
 
 
 socket.on('user-disconnect', (users) => {
+  console.log('user-disconnect', users);
+  const currentUserEmail = localStorage.getItem('email');
+  const otherUsers = _.filter(users, (user: {
+    email: string
+  }) => user.email !== currentUserEmail);
   const usersList = document.getElementById('users');
-  const generatedUsers = _.map(users, (user: {
+  const generatedUsers = _.map(otherUsers, (user: {
     email: string,
   }) => `<li>${user.email}</li>`).join('');
   usersList.innerHTML = generatedUsers;

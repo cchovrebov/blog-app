@@ -8,8 +8,6 @@ export default class User {
   private _email: string;
 
   constructor(options: Options) {
-    console.log('Constructor', options);
-
     this._email = options.email;
 
     connectUser({ email: options.email });
