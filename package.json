@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --mode development --open",
+    "startServer": "node server.js",
     "build": "webpack --mode production"
   },
   "repository": {
@@ -40,6 +41,7 @@
   "dependencies": {
     "axios": "^0.26.0",
     "firebase": "^9.6.7",
+    "socket.io": "^4.4.1",
     "socket.io-client": "^4.4.1"
   }
 }

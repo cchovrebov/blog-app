@@ -12,7 +12,7 @@ import './styles/index.scss';
   const token = localStorage.getItem('token');
   const email = localStorage.getItem('email');
 
-  if (email) user = new User({ email });
+  if (email && token) user = new User({ email, token });
 
   const questionBtn: any = document.getElementById('questionBtn');
   const loginBtn: any = document.getElementById('loginBtn');
@@ -92,6 +92,7 @@ import './styles/index.scss';
           getMui().close
           user = new User({
             email: email.value,
+            token,
           });
           setTabDisabled(true);
           logOutBtn.style.display = 'inline-block';
@@ -147,6 +148,7 @@ import './styles/index.scss';
           questionBtn.disabled = false;
           user = new User({
             email: email.value,
+            token,
           });
           setTabDisabled(true);
           logOutBtn.style.display = 'inline-block';
