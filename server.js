@@ -12,24 +12,28 @@ const messages = [];
 io.on('connection', socket => {
 
   socket.on('user-connect', (user) => {
-    console.log('User connected: ', user);
     if (!_.find(users, { email: user.email })) {
       users.push(user);
     }
+    console.log('User connected: ', user, users);
     socket.emit('user-connect', users, user.email);
   });
 
   socket.on('user-disconnect', (user) => {
-    console.log('User disconnected: ', user);
-    users = _.filter(users, { email: user.email });
+    users = _.filter(users, item => item.email !== user.email);
+    console.log('User disconnected: ', user, users);
     socket.emit('user-disconnect', users);
   });
 
   socket.on('message-send', (message) => {
     console.log('Message sent: ', message);
-    if (!_.find(messages, { id: message.id })) {
-      users.push(message);
+    if (!_.find(messages, {
+      email: message.email,
+      message: message.message,
+      dateTime: message.dateTime
+    })) {
+      messages.push(message);
     }
-    socket.emit('message-created', messages);
+    socket.emit('message-send', messages);
   });
 })

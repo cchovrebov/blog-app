@@ -4,8 +4,14 @@ import { User } from './classes/index';
 import { validateQuestionForm, validateLoginForm, validateSignUpForm } from './helpers/form.helper';
 import { ErrorMessages } from './helpers/error.helper';
 import { getMui } from './helpers/modal.helper';
+import { disconnectUser, sendMessage } from './services/ChatService';
 import './styles/index.scss';
 
+sendMessage({
+  email: 'test@gmail.com',
+  dateTime: '2022-10-10 15:00:02',
+  message: 'Test 123'
+});
 
 (function () {
   let user: User = null;
@@ -35,6 +41,7 @@ import './styles/index.scss';
 
   logOutBtn.addEventListener('click', function (e: any) {
     e.preventDefault();
+    disconnectUser({ email: localStorage.getItem('email') });
     localStorage.removeItem('token');
     localStorage.removeItem('email');
     loginBtn.style.display = 'inline-block';
