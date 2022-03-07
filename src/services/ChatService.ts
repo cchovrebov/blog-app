@@ -8,8 +8,9 @@ socket.on('connect', () => {
   console.log('Connected to socket id: ', socket.id);
 });
 
-socket.on('connect-user', (users, email) => {
-  const token = localStorage.getItem('token');
+socket.on('user-connect', (users, email) => {
+  console.log(users, email);
+
   const currentUser = _.find(users, { email });
 
   if (currentUser) {
@@ -17,22 +18,19 @@ socket.on('connect-user', (users, email) => {
     currentUserElement.innerText = currentUser.email;
   }
   const otherUsers = _.filter(users, (user: {
-    email: string,
-    token: string,
+    email: string
   }) => user.email !== email);
 
   const usersList = document.getElementById('users');
   usersList.innerHTML = '';
   const generatedUsers = _.map(otherUsers, (user: {
     email: string,
-    token: string,
   }) => `<li>${user.email}</li>`).join('');
   usersList.innerHTML = generatedUsers;
 });
 
 export function connectUser(user: {
   email: string,
-  token: string,
 }) {
-  socket.emit('user', user);
+  socket.emit('user-connect', user);
 }

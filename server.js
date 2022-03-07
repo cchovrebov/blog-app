@@ -6,17 +6,23 @@ const io = require('socket.io')(5000, {
 
 const _ = require('lodash');
 
-const users = [];
+let users = [];
 const messages = [];
 
 io.on('connection', socket => {
 
-  socket.on('user', (user) => {
+  socket.on('user-connect', (user) => {
     console.log('User connected: ', user);
     if (!_.find(users, { email: user.email })) {
       users.push(user);
     }
-    socket.emit('connect-user', users, user.email);
+    socket.emit('user-connect', users, user.email);
+  });
+
+  socket.on('user-disconnect', (user) => {
+    console.log('User disconnected: ', user);
+    users = _.filter(users, { email: user.email });
+    socket.emit('user-disconnect', users);
   });
 
   socket.on('message-send', (message) => {
