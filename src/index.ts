@@ -7,12 +7,6 @@ import { getMui } from './helpers/modal.helper';
 import { disconnectUser, sendMessage } from './services/ChatService';
 import './styles/index.scss';
 
-sendMessage({
-  email: 'test@gmail.com',
-  dateTime: '2022-10-10 15:00:02',
-  message: 'Test 123'
-});
-
 (function () {
   let user: User = null;
   const token = localStorage.getItem('token');
