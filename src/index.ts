@@ -40,7 +40,7 @@ const moment = require('moment');
     e.preventDefault();
     const msg: any = document.getElementById('msg');
     const message = {
-      message: msg,
+      message: msg.value,
       dateTime: moment().format('YYYY-MM-DD HH:mm:ss'),
       email: localStorage.getItem('email'),
     }

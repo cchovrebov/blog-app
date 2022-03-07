@@ -76,7 +76,7 @@ a {
 
 .chat-main {
 	display: grid;
-	grid-template-columns: 2fr 2fr;
+	grid-template-columns: 2fr 3fr;
 }
 
 .chat-sidebar {
@@ -113,6 +113,7 @@ a {
 	background-color: var(--light-color);
 	border-radius: 5px;
 	overflow-wrap: break-word;
+	max-width: 80%;
 }
 
 .chat-messages .message .meta {
@@ -121,6 +122,8 @@ a {
 	color: var(--dark-color-b);
 	opacity: 0.7;
 	margin-bottom: 7px;
+	display: flex;
+	justify-content: space-between;
 }
 
 .chat-messages .message .meta span {

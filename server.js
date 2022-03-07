@@ -25,12 +25,13 @@ io.on('connection', socket => {
     socket.join('main');
     socket.emit('user-connected', users);
     socket.broadcast.to('main').emit('user-connected', users);
+    socket.emit('message-send', messages);
+    socket.broadcast.to('main').emit('message-send', messages);
   });
 
   socket.on('user-disconnect', (user) => {
     users = _.filter(users, item => item.email !== user.email);
     console.log('User disconnected: ', user, users);
-
     socket.broadcast.to('main').emit('user-disconnect', users);
   });
 
@@ -43,8 +44,9 @@ io.on('connection', socket => {
     })) {
       messages.push(message);
     }
-    socket.broadcast.to('main').emit('message-send', messages);
+    socket.join('main');
     socket.emit('message-send', messages);
+    socket.broadcast.to('main').emit('message-send', messages);
   });
 })
 
