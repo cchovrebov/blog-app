@@ -1,5 +1,6 @@
 import { AxiosResponse } from 'axios';
 import Crud from '../classes/Crud.class';
+import { FIREBASE_API_KEY } from '../constants';
 
 interface LoginProps {
   email: string
@@ -8,7 +9,7 @@ interface LoginProps {
 }
 
 class AuthService extends Crud {
-  private _apiKey = 'AIzaSyDhlP2efPbQguHrH-Ey1ucuhRJYBQ0dV0Y';
+  private _apiKey = FIREBASE_API_KEY;
   private _signInUrl = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${this._apiKey}`;
   private _signUpUrl = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${this._apiKey}`
 

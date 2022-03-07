@@ -1,16 +1,9 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
+import { FIREBASE_API_CONFIG } from '../constants';
 
 class Firebase {
-  private config = {
-    apiKey: "AIzaSyDhlP2efPbQguHrH-Ey1ucuhRJYBQ0dV0Y",
-    authDomain: "blog-app-81fcb.firebaseapp.com",
-    databaseURL: "https://blog-app-81fcb-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "blog-app-81fcb",
-    storageBucket: "blog-app-81fcb.appspot.com",
-    messagingSenderId: "415824968449",
-    appId: "1:415824968449:web:dc74b7236b9eeb1fecf900"
-  };
+  private config = FIREBASE_API_CONFIG;
 
   private app: any;
   private database: any;

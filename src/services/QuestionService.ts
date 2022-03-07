@@ -2,6 +2,8 @@ import { AxiosResponse } from 'axios';
 import Crud from '../classes/Crud.class';
 const _ = require('lodash');
 
+import { FIREBASE_QUESTIONS_URL } from '../constants';
+
 export interface Options {
   userEmail?: string;
   id?: string;
@@ -11,7 +13,7 @@ export interface Options {
 }
 
 class QuestionService extends Crud {
-  private _url: string = 'https://blog-app-81fcb-default-rtdb.europe-west1.firebasedatabase.app';
+  private _url: string = FIREBASE_QUESTIONS_URL;
 
   private _paths = {
     questions: '/questions.json'
