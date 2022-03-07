@@ -7,6 +7,8 @@ import { getMui } from './helpers/modal.helper';
 import { disconnectUser, sendMessage } from './services/ChatService';
 import './styles/index.scss';
 
+const moment = require('moment');
+
 (function () {
   let user: User = null;
   const token = localStorage.getItem('token');
@@ -19,6 +21,7 @@ import './styles/index.scss';
   const signUpBtn: any = document.getElementById('signUpBtn');
   const logOutBtn: any = document.getElementById('logOutBtn');
   const chatTabBtn: any = document.getElementById('chatTabBtn');
+  const sendMsgBtn: any = document.getElementById('sendMsgBtn');
   const createQuestionError: any = document.getElementById('createQuestionError');
 
   questionBtn.disabled = !token;
@@ -32,6 +35,18 @@ import './styles/index.scss';
     if (isEnabled) chatTabBtn.removeAttribute('disabled');
     else chatTabBtn.setAttribute('disabled', '');
   }
+
+  sendMsgBtn.addEventListener('click', function (e: any) {
+    e.preventDefault();
+    const msg: any = document.getElementById('msg');
+    const message = {
+      message: msg,
+      dateTime: moment().format('YYYY-MM-DD HH:mm:ss'),
+      email: localStorage.getItem('email'),
+    }
+    sendMessage(message);
+    msg.value = '';
+  })
 
   logOutBtn.addEventListener('click', function (e: any) {
     e.preventDefault();

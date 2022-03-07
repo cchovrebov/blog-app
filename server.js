@@ -12,7 +12,6 @@ const io = socketio(server, {
   }
 });
 
-
 const _ = require('lodash');
 
 let users = [];
@@ -45,6 +44,7 @@ io.on('connection', socket => {
       messages.push(message);
     }
     socket.broadcast.to('main').emit('message-send', messages);
+    socket.emit('message-send', messages);
   });
 })
 
