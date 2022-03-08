@@ -1,5 +1,5 @@
 import { Questions, Question } from "./components/index";
-import { QuestionService, AuthService } from "./services/index";
+import { QuestionService, AuthService, AnswerService } from "./services/index";
 import { User } from './classes/index';
 import { validateQuestionForm, validateLoginForm, validateSignUpForm } from './helpers/form.helper';
 import { ErrorMessages } from './helpers/error.helper';
@@ -208,13 +208,16 @@ const moment = require('moment');
   })
 
   function renderQuestionList() {
-    QuestionService.getQuestions()
-      .then(res => {
-        new Questions({
-          questions: res,
-          selector: '#questions'
-        }).renderQuestions()
-      }).catch(err => console.log(err));
+    AnswerService.getAnswers().then(answers => {
+      QuestionService.getQuestions()
+        .then(res => {
+          new Questions({
+            questions: res,
+            selector: '#questions',
+            answers,
+          }).renderQuestions()
+        }).catch(err => console.log(err));
+    })
   }
   renderQuestionList();
 

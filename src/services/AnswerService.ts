@@ -4,18 +4,17 @@ const _ = require('lodash');
 import { FIREBASE_URL } from '../constants';
 
 export interface Options {
-  userEmail?: string;
-  id?: string;
-  title: string;
-  body: string;
+  text: string;
+  questionId: string;
   date: string;
+  email: string;
 }
 
-class QuestionService extends Crud {
+class AnswerService extends Crud {
   private _url: string = FIREBASE_URL;
 
   private _paths = {
-    questions: '/questions.json'
+    answers: '/answers.json'
   }
 
   private toEntity(data: any): Array<Options> {
@@ -30,17 +29,17 @@ class QuestionService extends Crud {
     return _.orderBy(formatedData, ['date'], ['desc']);
   }
 
-  async getQuestions(): Promise<Array<Options>> {
-    const res = await this.get(`${this._url}${this._paths.questions}`);
+  async getAnswers(): Promise<Array<Options>> {
+    const res = await this.get(`${this._url}${this._paths.answers}`);
     return this.toEntity(res);
   }
 
-  createQuestion(data: Options): Promise<any> {
+  createAnswer(data: Options): Promise<any> {
     const token = localStorage.getItem('token');
 
     if (!token) return Promise.resolve('No token');
-    return this.post(`${this._url}${this._paths.questions}?auth=${token}`, data);
+    return this.post(`${this._url}${this._paths.answers}?auth=${token}`, data);
   }
 }
 
-export default new QuestionService();
+export default new AnswerService();
