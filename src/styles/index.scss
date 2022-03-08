@@ -210,10 +210,12 @@ a {
 
 .answer-container {
 	padding-left: 10%;
+	margin-top: 10px;
 }
 .answer-buttons-container {
 	display: flex;
 	justify-content: space-between;
+	margin: 10px 0;
 }
 
 .hidden {
@@ -221,4 +223,8 @@ a {
 }
 .visible {
 	display: block;
+}
+.answer-item {
+	padding: 10px 0;
+	border-top: 1px solid gray;
 }
