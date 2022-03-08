@@ -1,4 +1,6 @@
 import { io } from 'socket.io-client';
+import { outputMessage } from '../helpers/chat.helper';
+import { API_URL } from '../constants';
 const _ = require('lodash');
 
 interface Message {
@@ -6,35 +8,13 @@ interface Message {
   dateTime: string
   message: string
 }
-
-function outputMessage(message: Message) {
-  const chatMessages = document.querySelector('.chat-messages');
-  const currentUserEmail = localStorage.getItem('email');
-  const div = document.createElement('div');
-  div.classList.add('message');
-  if (currentUserEmail === message.email) div.style.marginLeft = 'auto'
-  else div.style.marginRight = 'auto';
-  const p = document.createElement('p');
-  p.classList.add('meta');
-  p.innerText = message.email;
-  p.innerHTML += `<span>${message.dateTime}</span>`;
-  div.appendChild(p);
-  const para = document.createElement('p');
-  para.classList.add('text');
-  para.innerText = message.message;
-  div.appendChild(para);
-  document.querySelector('.chat-messages').appendChild(div);
-}
-
-const serverUrl = 'http://localhost:5000';
-const socket = io(serverUrl);
+const socket = io(API_URL);
 
 socket.on('connect', () => {
   console.log('Connected to socket id: ', socket.id);
 });
 
 socket.on('user-connected', (users) => {
-  console.log('user-connected', users);
   const currentUserEmail = localStorage.getItem('email');
   const currentUser = _.find(users, { email: currentUserEmail });
 
@@ -56,7 +36,6 @@ socket.on('user-connected', (users) => {
 
 
 socket.on('user-disconnect', (users) => {
-  console.log('user-disconnect', users);
   const currentUserEmail = localStorage.getItem('email');
   const otherUsers = _.filter(users, (user: {
     email: string
@@ -69,11 +48,6 @@ socket.on('user-disconnect', (users) => {
 });
 
 socket.on('message-send', (messages: Message[]) => {
-  console.log(messages);
-
-  // Logika kuri atvaizduoja laiskus
-  // Prisijungusio userio laiskai turetu atsivaizduoti is desines
-  // Kitu useriu is kaires
   document.querySelector('.chat-messages').innerHTML = '';
   _.forEach(messages, (message: Message) => {
     outputMessage(message);

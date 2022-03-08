@@ -207,3 +207,18 @@ a {
 		display: none;
 	}
 }
+
+.answer-container {
+	padding-left: 10%;
+}
+.answer-buttons-container {
+	display: flex;
+	justify-content: space-between;
+}
+
+.hidden {
+	display: none;
+}
+.visible {
+	display: block;
+}

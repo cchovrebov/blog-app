@@ -1,4 +1,3 @@
-import { AxiosResponse } from 'axios';
 import Crud from '../classes/Crud.class';
 const _ = require('lodash');
 
@@ -37,15 +36,9 @@ class QuestionService extends Crud {
   }
 
   createQuestion(data: Options): Promise<any> {
-    console.log(data);
-
     const token = localStorage.getItem('token');
 
-    if (!token) {
-      console.log('No token');
-
-      return Promise.resolve('Test');
-    }
+    if (!token) return Promise.resolve('No token');
     return this.post(`${this._url}${this._paths.questions}?auth=${token}`, data);
   }
 }

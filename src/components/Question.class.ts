@@ -107,12 +107,68 @@ export default class Question {
     body.className = 'mui--text-dark-secondary';
     this.getBodyContent(body, this._id);
 
-    const a1 = document.createElement('a');
-    a1.setAttribute('href', '#');
-    a1.innerHTML = `By <a href="#">${this._userEmail}</a> ${this.getPeriod()} ago`;
+    const p = document.createElement('p');
+    p.setAttribute('href', '#');
+    p.innerHTML = `By <a href="#">${this._userEmail}</a> ${this.getPeriod()} ago`;
+
+
+    // Perkelti i Answer component
+    const answerContainer = document.createElement('div');
+    answerContainer.className = 'answer-container';
+
+    const anwerButtonsContainer = document.createElement('div');
+    anwerButtonsContainer.className = 'answer-buttons-container';
+
+    const replyButton = document.createElement('a');
+    replyButton.setAttribute('href', '#');
+    replyButton.innerText = 'Reply';
+    anwerButtonsContainer.appendChild(replyButton);
+
+    replyButton.addEventListener('click', (e: any) => {
+      e.preventDefault();
+      const answerForm = document.getElementById(`answerForm${this._id}`);
+      if (answerForm.classList.contains('hidden')) answerForm.className = 'visible';
+      else answerForm.className = 'hidden';
+    })
+
+    const showAnswersButton = document.createElement('a');
+    showAnswersButton.setAttribute('href', '#');
+    showAnswersButton.innerText = 'Show answers';
+    anwerButtonsContainer.appendChild(showAnswersButton);
+
+    const answersList = document.createElement('ul');
+    answersList.className = 'hidden';
+    answersList.id = `answerList${this._id}`;
+    showAnswersButton.addEventListener('click', (e: any) => {
+      e.preventDefault();
+      const list = document.getElementById(`answerList${this._id}`);
+      if (list.classList.contains('hidden')) list.className = 'visible';
+      else list.className = 'hidden';
+    })
+    const answer = document.createElement('li');
+
+    answer.innerText = 'Answer';
+
+    answersList.appendChild(answer);
+
+    const answerFormContainer = document.createElement('div');
+    answerFormContainer.innerHTML = `
+      <form class="hidden" id="answerForm${this._id}">
+        <input type="text" />
+        <button>Submit</button>
+      </form>
+    `;
+    answerContainer.appendChild(anwerButtonsContainer);
+    answerContainer.appendChild(answerFormContainer);
+
+    answerContainer.appendChild(answersList);
+
+    // Perkelti i Answer component END of block
+
+    body.appendChild(answerContainer);
 
     article.appendChild(title);
-    article.appendChild(a1);
+    article.appendChild(p);
     article.appendChild(body);
 
     return article;
